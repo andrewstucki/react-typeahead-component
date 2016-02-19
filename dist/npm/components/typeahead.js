@@ -23,6 +23,7 @@ module.exports = React.createClass({
         inputId: React.PropTypes.string,
         inputName: React.PropTypes.string,
         className: React.PropTypes.string,
+        nestedClassName: React.PropTypes.string,
         autoFocus: React.PropTypes.bool,
         hoverSelect: React.PropTypes.bool,
         inputValue: React.PropTypes.string,
@@ -50,6 +51,7 @@ module.exports = React.createClass({
     getDefaultProps: function() {
         return {
             className: '',
+            nestedClassName: '',
             inputValue: '',
             options: [],
             hoverSelect: true,
@@ -135,11 +137,11 @@ module.exports = React.createClass({
             React.createElement("div", {
                 style: {
                     position: 'relative'
-                },
-                className: 'react-typeahead-container ' + _this.props.className},
-                _this.renderInput(),
-                _this.renderDropdown(),
-                _this.renderAriaMessageForOptions(),
+                }, 
+                className: 'react-typeahead-container ' + _this.props.className}, 
+                _this.renderInput(), 
+                _this.renderDropdown(), 
+                _this.renderAriaMessageForOptions(), 
                 _this.renderAriaMessageForIncomingOptions()
             )
         );
@@ -157,46 +159,46 @@ module.exports = React.createClass({
             React.createElement("div", {
                 style: {
                     position: 'relative'
-                },
-                className: "react-typeahead-input-container"},
+                }, 
+                className: "react-typeahead-input-container"}, 
                 React.createElement(Input, {
-                    disabled: true,
-                    role: "presentation",
-                    "aria-hidden": true,
-                    dir: inputDirection,
-                    className: className + ' react-typeahead-hint',
+                    disabled: true, 
+                    role: "presentation", 
+                    "aria-hidden": true, 
+                    dir: inputDirection, 
+                    className: className + ' react-typeahead-hint' + _this.props.nestedClassName, 
                     style: {
                         color: 'silver',
                         WebkitTextFillColor: 'silver',
                         position: 'absolute'
-                    },
+                    }, 
                     value: state.isHintVisible ? props.handleHint(inputValue, props.options) : null}
-                ),
+                ), 
                 React.createElement(Input, {
-                    ref: "input",
-                    role: "combobox",
-                    "aria-owns": _this.optionsId,
-                    "aria-expanded": state.isDropdownVisible,
-                    "aria-autocomplete": "both",
-                    "aria-activedescendant": _this.activeDescendantId,
-                    value: inputValue,
-                    spellCheck: false,
-                    autoComplete: false,
-                    autoCorrect: false,
-                    dir: inputDirection,
-                    onClick: _this.handleClick,
-                    onFocus: _this.handleFocus,
-                    onBlur: props.onBlur,
-                    onChange: _this.handleChange,
-                    onKeyDown: _this.handleKeyDown,
-                    id: props.inputId,
-                    name: props.inputName,
-                    autoFocus: props.autoFocus,
-                    placeholder: props.placeholder,
-                    onSelect: props.onSelect,
-                    onKeyUp: props.onKeyUp,
-                    onKeyPress: props.onKeyPress,
-                    className: className + ' react-typeahead-usertext',
+                    ref: "input", 
+                    role: "combobox", 
+                    "aria-owns": _this.optionsId, 
+                    "aria-expanded": state.isDropdownVisible, 
+                    "aria-autocomplete": "both", 
+                    "aria-activedescendant": _this.activeDescendantId, 
+                    value: inputValue, 
+                    spellCheck: false, 
+                    autoComplete: false, 
+                    autoCorrect: false, 
+                    dir: inputDirection, 
+                    onClick: _this.handleClick, 
+                    onFocus: _this.handleFocus, 
+                    onBlur: props.onBlur, 
+                    onChange: _this.handleChange, 
+                    onKeyDown: _this.handleKeyDown, 
+                    id: props.inputId, 
+                    name: props.inputName, 
+                    autoFocus: props.autoFocus, 
+                    placeholder: props.placeholder, 
+                    onSelect: props.onSelect, 
+                    onKeyUp: props.onKeyUp, 
+                    onKeyPress: props.onKeyPress, 
+                    className: className + ' react-typeahead-usertext' + _this.props.nestedClassName, 
                     style: {
                         position: 'relative',
                         background: 'transparent'
@@ -220,42 +222,42 @@ module.exports = React.createClass({
         }
 
         return (
-            React.createElement("ul", {id: _this.optionsId,
-                ref: "dropdown",
-                role: "listbox",
-                "aria-hidden": !isDropdownVisible,
+            React.createElement("ul", {id: _this.optionsId, 
+                ref: "dropdown", 
+                role: "listbox", 
+                "aria-hidden": !isDropdownVisible, 
                 style: {
                     width: '100%',
                     background: '#fff',
                     position: 'absolute',
                     boxSizing: 'border-box',
                     display: isDropdownVisible ? 'block' : 'none'
-                },
-                className: "react-typeahead-options",
-                onMouseOut: this.handleMouseOut},
-
+                }, 
+                className: "react-typeahead-options", 
+                onMouseOut: this.handleMouseOut}, 
+                
                     props.options.map(function(data, index) {
                         var isSelected = selectedIndex === index;
 
                         return (
-                            React.createElement("li", {id: isSelected ? activeDescendantId : null,
-                                "aria-selected": isSelected,
-                                role: "option",
-                                key: index,
-                                onClick: _this.handleOptionClick.bind(_this, index),
-                                onMouseOver: _this.handleOptionMouseOver.bind(_this, index)},
+                            React.createElement("li", {id: isSelected ? activeDescendantId : null, 
+                                "aria-selected": isSelected, 
+                                role: "option", 
+                                key: index, 
+                                onClick: _this.handleOptionClick.bind(_this, index), 
+                                onMouseOver: _this.handleOptionMouseOver.bind(_this, index)}, 
 
                                 React.createElement(OptionTemplate, {
-                                    data: data,
-                                    index: index,
-                                    userInputValue: _this.userInputValue,
-                                    inputValue: props.inputValue,
+                                    data: data, 
+                                    index: index, 
+                                    userInputValue: _this.userInputValue, 
+                                    inputValue: props.inputValue, 
                                     isSelected: isSelected}
                                 )
                             )
                         );
                     })
-
+                
             )
         );
     },
