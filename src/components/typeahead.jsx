@@ -23,6 +23,7 @@ module.exports = React.createClass({
         inputId: React.PropTypes.string,
         inputName: React.PropTypes.string,
         className: React.PropTypes.string,
+        nestedClassName: React.PropTypes.string,
         autoFocus: React.PropTypes.bool,
         hoverSelect: React.PropTypes.bool,
         inputValue: React.PropTypes.string,
@@ -50,6 +51,7 @@ module.exports = React.createClass({
     getDefaultProps: function() {
         return {
             className: '',
+            nestedClassName: '',
             inputValue: '',
             options: [],
             hoverSelect: true,
@@ -164,7 +166,7 @@ module.exports = React.createClass({
                     role='presentation'
                     aria-hidden={true}
                     dir={inputDirection}
-                    className={className + ' react-typeahead-hint'}
+                    className={className + ' react-typeahead-hint' + _this.props.nestedClassName}
                     style={{
                         color: 'silver',
                         WebkitTextFillColor: 'silver',
@@ -196,7 +198,7 @@ module.exports = React.createClass({
                     onSelect={props.onSelect}
                     onKeyUp={props.onKeyUp}
                     onKeyPress={props.onKeyPress}
-                    className={className + ' react-typeahead-usertext'}
+                    className={className + ' react-typeahead-usertext' + _this.props.nestedClassName}
                     style={{
                         position: 'relative',
                         background: 'transparent'
